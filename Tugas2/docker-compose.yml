@@ -1,0 +1,32 @@
+version: "3.8"
+
+services:
+  order-service:
+    build: ./order-service
+    volumes:
+      - ./proto:/app/proto
+    ports:
+      - "50051:50051"
+
+  payment-service:
+    build: ./payment-service
+    volumes:
+      - ./proto:/app/proto
+    ports:
+      - "50052:50052"
+
+  shipping-service:
+    build: ./shipping-service
+    volumes:
+      - ./proto:/app/proto
+    ports:
+      - "50053:50053"
+
+  orchestrator:
+    build: ./orchestrator
+    volumes:
+      - ./proto:/app/proto
+    depends_on:
+      - order-service
+      - payment-service
+      - shipping-service

@@ -1,0 +1,20 @@
+syntax = "proto3";
+
+package shipping;
+
+service ShippingService {
+  rpc StartShipping (ShippingRequest) returns (ShippingResponse);
+  rpc CancelShipping (CancelRequest) returns (ShippingResponse);
+}
+
+message ShippingRequest {
+  string order_id = 1;
+}
+
+message CancelRequest {
+  string order_id = 1;
+}
+
+message ShippingResponse {
+  string status = 1;
+}
